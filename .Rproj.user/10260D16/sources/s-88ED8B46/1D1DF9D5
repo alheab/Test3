@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1536261611591.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "1D1DF9D5",
+    "lastKnownWriteTime" : 1536615795,
+    "last_content_update" : 1536615795257,
+    "path" : "~/Cursos/curso R/Test3/Test3.Rmd",
+    "project_path" : "Test3.Rmd",
+    "properties" : {
+        "cursorPosition" : "43,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

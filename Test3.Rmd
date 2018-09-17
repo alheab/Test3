@@ -1,0 +1,157 @@
+---
+title: "Enfermedades de corales"
+author: "Ale H.A."
+date: "6 de septiembre de 2018"
+output: pdf_document
+bibliography: Bibliography.bib 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(tidyverse)
+library(broom)
+library(MuMIn)
+library(knitr)
+library(tidyr)
+library(stringr)
+library(dplyr)
+library(lubridate)
+library(ggmap)
+library(png)
+library(grid)
+
+CMadres<- read_excel("C:/Users/Julio César/Desktop/2018-02.13 Datos Alejandra Herrerías/Documents/TesisM.C/Datos Ale-2015.xlsx",sheet = "CMadres")
+
+CM<-CMadres %>% filter(!is.na(`DiamMin`),!is.na(Altura),!is.na(`PorcentMuerto`),
+                       !is.na(PorcentVivo),!is.na(`AreaMuerta`))
+
+```
+
+# Introducción
+A lo largo de la historia de los seres vivos siempre han existido enfermedades que han impactado los ciclos de vida de los organismos, desde mediados del siglo XX su incidencia se ha ido incrementando, llegando a reportarse a partir de 1970 [@richardson1998coral; @jones2008global], 616 nuevos brotes de enfermedades al año, afectando de igual manera en ambientes marinos y terrestres [@madoff2005internet]. 
+
+El aumento en la incidencia  de las enfermedades emergentes es consecuencia de la deteriorada calidad del medio (cambios antropogénicos y demográficos), al manifestarse como una respuesta de los organismos ante las diferentes presiones que enfrentan, por efecto del cambio climático global y regional [@jones2008global;@allen2016global]. Su aparición en ambientes marinos se ha visto reflejada en el creciente número de casos en corales, langostas, erizos, peces y otras especies de los arrecifes [@hughes36bd; @altizer2003rapid; @mccallum2004does].
+
+Para los corales se han descrito más de 40 enfermedades emergentes sobre 200 especies, de las cuales únicamente de pocas se conoce el posible agente causal. A pesar de esta situación se les acuñó como enfermedades, siendo el término síndrome, el más correcto, debido a que no se ha identificado el agente causal [@anderson1989dorland; @weil2004coral; @bruckner2015history].
+
+Las enfermedades emergentes en corales se registraron por primera vez en el Caribe con la denominada de banda negra, afectando a corales masivos [@antonius1973new], y unas décadas después en la gran barrera arrecifal. En el Indo-Pacífico, sólo el 25% (98 spp) ha sido documentado con una o más enfermedades, mientras que en el Caribe el 82% (52 spp) es susceptible a estas [@sutherland2004disease]. Dichas enfermedades presentan signos similares en ambos sitios, pero se encuentran afectando diferentes especies de corales [@willis2004coral].
+
+Los corales pueden presentardos tipos de enfermedades no patogénicas o abióticas y las bióticas. Las primeras resultan del estrés ambiental [@peters2015diseases], como el blanqueamiento térmico, ocasionado por anomalías térmicas; consiste en la pérdida de pigmento por la disrupción de la simbiosis entre el coral y las zooxantelas, provocado por el incremento o disminución de la temperatura, alterándose el proceso de fotosíntesis, lo cual genera un daño debido al exceso de energía en el fotosistema; si la tasa de daño es mayor que la de recuperación, el estrés térmico puede dar lugar a la muerte de las microalgas y, por lo tanto, al blanqueamiento. Las enfermedades bióticas implican un agente causal primario (virus, bacterias, hongos, protozoarios), así como la interacción entre huésped, reservorio y ambiente [@peters2015diseases]; un claro ejemplo es el caso del alga Halimeda opuntia que funge como reservorio de la bacteria Aurantimonas coralicida, responsable de la enfermedad  plaga blanca tipo II [@nugues2004algal]. Todas las enfermedades bióticas están asociadas con  estresores ambientales y con agentes patógenos oportunistas o secundarios, los cuales  aprovechan situaciones de estrés para ingresar en el hospedero, gracias al debilitamiento temporal del sistema inmune.
+
+En el Caribe, el número y prevalencia de enfermedades en corales se ha incrementado, a tal punto de ser considerado un hot spot porque aparecen rápidamente y tienen una alta prevalencia con una amplia distribución geográfica, [@jordan2011caribbean]. En esta zona se registran ocho de las enfermedades más comunes  en los corales: enfermedad de banda negra (BBD), enfermedad de banda blanca (WBD), enfermedad de banda amarilla (YBD), plaga blanca (WP tipo I y tipo II), enfermedad de puntos blancos (WPD), enfermedad de puntos negros (DSD), infección de ciliados (CCI) y anomalías de crecimiento (Gas; Bruckner, 2016). El impacto de ellas provocó un descenso rápido y severo en la cobertura; sobre todo después de la mortalidad masiva de Acropora palmata causada por la enfermedad de banda blanca, a mediados de 1970 y principios de 1980  [@network2014status], lo cual desestabilizó la dinámica de la población y del ecosistema a escala local y regional [@weil2009yellow; @bruckner2002priorities;@jordan2003atlantic;@berkelmans2004comparison;@myers2009coral], al  modificar la estructura y composición de los arrecifes mediante la eliminación de las especies más comunes y localmente abundantes (constructoras de arrecifes como: Acropora palmata, Orbicella annularis, O. faveolata, Montastraea cavernosa, Colpophilia natans). Especies grandes con vida larga son sustituidas por otras pequeñas de vida corta, las cuales no ofrecen los mismos servicios a la comunidad [@green2000significance; @garcia2002relacion; @williams2010predictive].
+
+La historia se repite para los corales masivos del género Orbicella al surgir la enfermedad de banda amarilla registrada por primera vez en los Cayos de Florida en 1994. Algunos estudios muestran que Orbicella spp (antes Montastraea), posee una alta prevalencia de enfermedades debido a que presenta mayor susceptibilidad, destacando las de banda amarilla, banda negra y plaga blanca [@harvell2007coral; @bruckner2006consequences]; debido a su afectación por esto y a que tienen una tasa de regeneración baja [@weil1994multi], constituyen el grupo de especies con mayor mortalidad por pérdida de tejido [@gardner2003long; @harvell2007coral].
+
+
+
+
+#Métodos
+##Área de estudio
+La Unidad Arrecifal Jardines del Parque Nacional Arrecife de Puerto Morelos se localiza en el mar Caribe en la costa este de Quintana Roo; se ubica aproximadamente a 1 000 m de la línea de costa, frente al poblado de Puerto Morelos, a 36 kilómetros al sur de Cancún. Las coordenadas geográficas del área de estudio son: 20°49´54.61 latitud norte y 86° 52´28.51 longitud oeste.
+
+El arrecife de Puerto Morelos se encuentra dentro del corredor turístico de aproximadamente 120 km, conocido como "La Riviera Maya". En la actualidad esta zona tiene un desarrollo urbano y turístico muy elevado (Figura 1), por consiguiente, es objeto de una acelerada transformación [@instituto2000programa], degradando el ambiente por contaminación y eutrofización [@jordan1993ecosistema]. 
+
+
+```{r, echo=FALSE,warning=FALSE, message=FALSE,fig.width=12, fig.cap= "Localización del Arrecife Jardines."}
+mapa <- get_map(location = c(lon = -86.8788, lat = 20.826),
+                         color = "color",
+                         source = "google",
+                         maptype = "satellite",
+                         zoom = 14)
+ggmap(mapa,
+      extent = "device",
+      ylab = "Latitude",
+      xlab = "Longitude")+ scale_color_discrete (name= "Localización del Arrecife Jardines",
+                               breaks= c("FALSE", "TRUE"))
+```
+
+La Unidad Arrecifal Jardines presenta una zona arrecifal tipo barrera bordeante, paralela a la línea de costa, que es una continuación de la barrera arrecifal de Belice. El área de estudio se centró en la zona frontal del arrecife, entre 12 y 15 m de profundidad, debido a que esta posee el ambiente idóneo para la especie estudiada, cuenta con una mayor rugosidad de fondo, gran diversidad y abundancia en la comunidad coralina [@jordan1993ecosistema].
+
+Asimismo cabe mencionar que la Unidad Arrecifal Jardines se encuentra dentro de un Área Natural Protegida con una superficie total de 9,066-63-11 hectáreas. La comunidad de Puerto Morelos participó en la propuesta y formación de dicha área con carácter de Parque Nacional, con el fin  de salvaguardar el patrimonio natural que representan los arrecifes coralinos. El decreto de su creación fue publicado el 2 de febrero de 1998 en el Diario Oficial de la Federación [@instituto2000programa].
+
+En este parque arrecifal existe un registro de 669 especies de fauna marina, tanto invertebrados como vertebrados, pertenecientes a 75 ordenes, 153 spp de cnidarios, 20 de esponjas, 10 spp de anélidos, 172 spp de crustáceos, 31 spp de equinodermos, 33 spp de moluscos, 226 spp de peces, tres spp de reptiles y 21 spp de mamíferos. También tres especies de pastos marinos, 264 especies de algas y siete especies de dinoflagelados simbiontes [@instituto2000programa].
+
+Se llevó a cabo un registro rápido sobre el estado de las colonias de coral de la especie **Orbicella faveolata, realizando un conteo de aquellas sanas, así como de las que presentaban síndromes o interacciones de competencia. La identificación de los signos y síndromes se hizo de acuerdo al tipo de lesiones (Tabla 1).
+
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE}
+Sindrome = c("S.Amarillo","S.Blanco","Banda Negra","Puntos Negros","Blanqueamiento","Tumores")
+
+Abrev= c("YS","WS","BB","DS","Bp/Bs/Be","TUM")
+
+Caracteristicas = c("Presencia de anillos o bandas de color amarillo brillante translúcido", "En el punto de infección se ´puede observar la banda blanca del esqueleto expuesto", "Conjunto microbiano que forma una banda de 1 a 30 mm de espesor, destruye el tejido", "Pequeñas manchas redondas, más oscuras que el tejido normal","Pérdida del color característico, tornándose pálido o blanco", "Crecimiento anormal del tejido coralino y del esqueleto")
+Tasa_Avance = c("0.1-0.4 mm/día", "3.1 mm/día","3.1 mm/día", "NA","NA","NA")
+
+Sindromes<-cbind.data.frame(Sindrome,Abrev,Caracteristicas)
+
+
+kable(Sindromes, caption = "Tabla 1. Características principales de los síndromes en los corales")
+
+```
+
+
+
+
+#Resultados
+En total fueron muestreadas 53 colonias del coral O. faveolata. El diámetro máximo de estas tuvo un intervalo de 25 cm a 9.10 m, con una media de `r round(mean(CM$DiamMax))` metros (SD = ± `r round(sd(CM$DiamMax),2)`m). La altura de las colonias varió entre 10 cm hasta 3.73 m con una media de  `r round(mean(CM$Altura))`m (SD = ± `r round(sd(CM$Altura),2)`m). A partir de los tres metros se aprecia una disminución gradual de frecuencias (Fig. 2).
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE,fig.width=12, fig.cap= "Histograma del del diámetro máximo de las colonias de Orbicella faveolata"}
+ggplot(CM)+geom_histogram(aes(DiamMax),bins = 20,colour="light blue",
+            fill="dark blue")+theme_classic()
+```
+
+
+
+
+Las colonias de coral pueden fisionarse en varias secciones de tejido (creando fragmentos o colonias secundarias) por diferentes motivos (p.e.: enfermedades, depredación, interacciones de competencia, sedimentación). De las 53 colonias muestreadas, 12 no se encontraban fisionadas, siete poseían menos de cuatro fragmentos, mientras que el promedio en las cuales se dividían, fue de `r mean(CM$frag)`, aunque para las colonias más fisionadas el intervalo iba desde 26 hasta 64 fragmentos, llegándose a encontrar una colonia dividida en un total de `r max(CM$frag)` fragmentos. En la figura 3 se observa el modelo de predicción de lo que sucederá a la superficie de las colonias de O. faveolata, debido a que la mortalidad parcial (área muerta) tenderá a expandirse, provocando fisión del tejido vivo en las colonias de coral.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=12, fig.cap= "Modelo lineal del aumento de la mortalidad parcial en las colonias"}
+mod1<-lm(AreFrag.m2 ~ frag,data=CM)
+
+dh<-expand.grid(list(frag=c(16, 40, 13, 1, 2, 41, 4, 20, 26, 15, 24, 6, 55, 32, 61, 18, 
+           9, 37, 8, 14, 62, 3, 35, 21, 46, 19, 12, 53, 31, 154) , Signo = c(
+             "Ys", "BE", "Ws", "Ds", "0"),Signo2=c("BP", "Ws", "0", "Ys", "BE", "Ds", "BS", "BB")))
+           
+
+dh$pred<-predict(mod1,dh,se.fit = TRUE)$fit
+dh$SE<-predict(mod1,dh,se.fit = TRUE)$se.fit
+
+ggplot(dh,aes(x=frag,y=pred))+geom_ribbon(aes(ymin=pred-SE,ymax=pred+SE
+                    ),alpha=0.05)+ geom_line()+theme_classic()
+```
+
+
+
+
+La prevalencia de signos de enfermedad en las colonias de Orbicella faveolata en el Arrecife Jardines fue de `r mean(CM$Prev)*100`% durante los meses de julio y agosto de 2015. El signo amarillo fue el más prevalente, seguido de los signos blancos (BE= borde blanqueado, BS= punto blanco y BP= pálido) y signo de puntos oscuros (Ds). La figura 4 se muestra la presencia de signos de enfermedad registrados en función del área de tejido vivo las colonias. Se considera a la mortalidad parcial como efecto de la presencia de algún síndrome, los diferentes grados de mortalidad parcial (mayor número  de fragmentos) indicarían fechas de infección distintas; aquellas que presentan mayor proporción de fisión  serían las primeras colonias infectadas. 
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.width=12, fig.cap= "Principales signos encontrados en el área de tejido vivo de las colonias coralinas (AreFrag.2), el tamaño de los círculos representa la proporción de fragmentos provocados por la presencia de los signos"}
+
+ggplot(CM, aes(x = Signo, y = AreFrag.m2)) + geom_point(aes(
+  color=Signo2,size = frag))+theme_classic()+scale_color_manual(
+    values=c("green2","black", "gray", "darkseagreen1","darkslategray3","goldenrod","snow2","Yellow"))
+```
+
+
+
+
+#Conclusiones
+
+*Las colonias O. faveolata del arrecife Jardines presentaron un gran porcentaje de fragmentación de tejido debido a que las colonias han pasado mayor tiempo expuestas a los diversos síndromes, provocando que se vayan fisionando debido a la unión de los puntos de lesión. Por tal motivo el promedio de la talla del tejido vivo en las colonias es de `r round(mean(CM$AreFrag.m2))` metros.
+
+
+*La generación de los fragmentos en las colonias no siempre implica un incremento en la talla de los parches de tejido muerto, también existe la posibilidad de que alguna de esas colonias sea un recluta sexual.
+
+
+*Existe una relación entre el área del tejido muerto y el número de fragmentos de las colonias.
+
+
+*Signo amarillo fue el síndrome más prevalente; seguido de los Signos blancos, los cuales pueden ser indicios del inicio de signo amarillo.
+
+
+
+
+#Bibliografía
+
+

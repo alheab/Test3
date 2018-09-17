@@ -1,0 +1,58 @@
+---
+title: "Enfermedades de corales"
+author: "Ale H.A."
+date: "6 de septiembre de 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(tidyverse)
+library(broom)
+library(MuMIn)
+library(knitr)
+library(tidyr)
+library(stringr)
+library(dplyr)
+library(lubridate)
+
+
+CMadres<- read_excel("C:/Users/Julio César/Desktop/2018-02.13 Datos Alejandra Herrerías/Documents/TesisM.C/Datos Ale-2015.xlsx",sheet = "CMadres")
+
+CHijas <- read_excel("C:/Users/Julio César/Desktop/2018-02.13 Datos Alejandra Herrerías/Documents/TesisM.C/Datos Ale-2015.xlsx",sheet = "Fragmentos")
+
+CoorCM<- read_excel("C:/Users/Julio César/Desktop/2018-02.13 Datos Alejandra Herrerías/Documents/TesisM.C/Datos Ale-2015.xlsx",sheet = "Mapa")
+
+
+CM<-CMadres %>% filter(!is.na(`DiamMin`),!is.na(Altura),!is.na(`PorcentMuerto`),
+                       !is.na(PorcentVivo),!is.na(`AreaMuerta`))
+
+```
+
+## Introducción
+A lo largo de la historia de los seres vivos siempre han existido enfermedades que han impactado los ciclos de vida de los organismos, a mediados del siglo XX su incidencia se ha ido incrementando, llegando a reportarse a partir de 1970 (Jones, et al., 2008), 616 nuevos brotes de enfermedades al año, afectando de igual manera en ambientes marinos y terrestres (Madoff y Woodall, 2005). 
+
+El aumento en la incidencia  de las enfermedades emergentes es consecuencia de la deteriorada calidad del medio (cambios antropogénicos y demográficos), al manifestarse como una respuesta de los organismos ante las diferentes presiones que enfrentan, por efecto del cambio climático global y regional (Jones et al., 2008; Allen et al., 2016). Su aparición en ambientes marinos se ha visto reflejada en el creciente número de casos en corales, langostas, erizos, peces y otras especies de los arrecifes (Hughes et al., 1985; Altizer et al., 2003; McCallum et al., 2004). 
+
+
+
+```{r, echo=FALSE}
+knitr::include_graphics("nombre de la imagen")
+```
+
+
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

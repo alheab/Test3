@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1536687915929.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "159857901",
+    "id" : "E44A448B",
+    "lastKnownWriteTime" : 1536766277,
+    "last_content_update" : 1536766277195,
+    "path" : "~/Cursos/curso R/Test2/Test2.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "106,0",
+        "scrollLine" : "73"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

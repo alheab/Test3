@@ -1,0 +1,85 @@
+library(ggmap)
+library(readxl)
+library(tidyverse)
+library(broom)
+library(MuMIn)
+library(knitr)
+library(tidyr)
+library(stringr)
+library(dplyr)
+library(lubridate)
+
+CMadres<- read_excel("C:/Users/Julio César/Desktop/2018-02.13 Datos Alejandra Herrerías/Documents/TesisM.C/Datos Ale-2015.xlsx",sheet = "CMadres")
+
+CHijas <- read_excel("C:/Users/Julio César/Desktop/2018-02.13 Datos Alejandra Herrerías/Documents/TesisM.C/Datos Ale-2015.xlsx",sheet = "Fragmentos")
+
+CoorCM<- read_excel("C:/Users/Julio César/Desktop/2018-02.13 Datos Alejandra Herrerías/Documents/TesisM.C/Datos Ale-2015.xlsx",sheet = "Mapa")
+
+
+CM<-CMadres %>% filter(!is.na(`DiamMin`),!is.na(Altura),!is.na(`PorcentMuerto`),
+                       !is.na(PorcentVivo),!is.na(`AreaMuerta`))
+
+##########area de estudio##########
+
+mapa <- get_map(location = c(lon = -86.8788, lat = 20.826),
+                         color = "color",
+                         source = "google",
+                         maptype = "satellite",
+                         zoom = 15)
+ggmap(mapa,
+      extent = "device",
+      ylab = "Latitude",
+      xlab = "Longitude")
++ 
+  geom_point(aes(x= "Longitud",y= "Latitud", colour="yellow"),data= CoorCM)
+
+
+
+mapa + scale_color_discrete (name= "Localización de los Parques Naturales",
+                               breaks= c("FALSE", "TRUE"))
+
+
+###ejemplo###
+
+mapImageData1 <- get_map(location = c(lon = -0.016179, lat = 51.538525),
+                         color = "color",
+                         source = "google",
+                         maptype = "satellite",
+                         zoom = 17)
+
+ggmap(mapImageData1,
+      extent = "device",
+      ylab = "Latitude",
+      xlab = "Longitude")
+
+########## modelos ############
+
+
+
+mod1<-lm(AreFrag.m2 ~ frag,data=CM)
+View(tidy(mod1))
+View(augment(mod1))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

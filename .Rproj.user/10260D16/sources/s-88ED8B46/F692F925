@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1536676614858.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F692F925",
+    "lastKnownWriteTime" : 1536262383,
+    "last_content_update" : 1536262383,
+    "path" : "~/Cursos/curso R/Test2/test2.Rmd",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "35,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

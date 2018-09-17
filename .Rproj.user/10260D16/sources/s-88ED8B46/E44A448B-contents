@@ -1,0 +1,129 @@
+library(readxl)
+library(tidyverse)
+library(broom)
+library(MuMIn)
+library(knitr)
+library(tidyr)
+library(stringr)
+library(dplyr)
+library(lubridate)
+
+
+CMadres<- read_excel("C:/Users/Julio César/Desktop/2018-02.13 Datos Alejandra Herrerías/Documents/TesisM.C/Datos Ale-2015.xlsx",sheet = "CMadres")
+
+CHijas <- read_excel("C:/Users/Julio César/Desktop/2018-02.13 Datos Alejandra Herrerías/Documents/TesisM.C/Datos Ale-2015.xlsx",sheet = "Fragmentos")
+
+CoorCM<- read_excel("C:/Users/Julio César/Desktop/2018-02.13 Datos Alejandra Herrerías/Documents/TesisM.C/Datos Ale-2015.xlsx",sheet = "Mapa")
+
+
+CM<-CMadres %>% filter(!is.na(`DiamMin`),!is.na(Altura),!is.na(`PorcentMuerto`),
+                       !is.na(PorcentVivo),!is.na(`AreaMuerta`))
+
+
+mod1<-lm(AreFrag.m2 ~ frag,data=CM)
+mod2<-lm(AreFrag.m2 ~ frag+Signo,data=CM)
+mod3<-lm(AreFrag.m2 ~ frag+Signo+Signo2+algas,data=CM)
+mod4<-lm(AreFrag.m2 ~ frag:Signo,data=CM)
+mod5<-lm(AreFrag.m2 ~ frag*Signo*Signo2*algas,data=CM)
+mod6<-lm(AreFrag.m2 ~ Signo,data=CM)
+mod7<-lm(AreFrag.m2 ~ Signo*Signo2*algas,data=CM)
+mod8<-lm(AreFrag.m2 ~ Signo+Signo2+algas,data=CM)
+
+
+mod9<-lm(frag ~ Signo+Signo2+algas,data=CM)
+mod10<-lm(frag ~ Signo*Signo2*algas,data=CM)
+mod11<-lm(AreFrag.m2 ~ frag+AreaMuerta+Signo+Signo2+algas,data=CM)
+mod12<-lm(AreFrag.m2 ~ frag*AreaMuerta*Signo*Signo2*algas,data=CM)
+mod13<-lm(AreFrag.m2 ~ frag*AreaMuerta*Signo,data=CM)
+mod14<-lm(AreFrag.m2 ~ frag+AreaMuerta*Signo,data=CM)
+mod15<-lm(AreFrag.m2 ~ AreaMuerta+Signo,data=CM)
+mod16<-lm(AreFrag.m2 ~ AreaMuerta:Signo,data=CM)
+mod17<-lm(frag ~ AreaMuerta:Signo,data=CM)
+mod18<-lm(frag ~ AreaMuerta+Signo,data=CM)
+
+
+
+Modelo1<-glance(mod1) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod1")
+Modelo2<-glance(mod2) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod2")
+Modelo3<-glance(mod3) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod3")
+Modelo4<-glance(mod4) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod4")
+Modelo5<-glance(mod5) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod5")
+Modelo6<-glance(mod6) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod6")
+Modelo7<-glance(mod7) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod7")
+Modelo8<-glance(mod8) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod8")
+
+Modelo9<-glance(mod9) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod9")
+Modelo10<-glance(mod10) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod10")
+Modelo11<-glance(mod11) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod11")
+Modelo12<-glance(mod12) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod12")
+Modelo13<-glance(mod13) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod13")
+Modelo14<-glance(mod14) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod14")
+Modelo15<-glance(mod15) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod15")
+Modelo16<-glance(mod16) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod16")
+Modelo17<-glance(mod17) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod17")
+Modelo18<-glance(mod18) %>% dplyr::select(r.squared,df,AIC) %>% mutate(Modelo="mod18")
+
+
+
+Modelos<-bind_rows(Modelo1,Modelo2,Modelo3,Modelo4,Modelo5,Modelo6,Modelo7,Modelo8,Modelo9
+                  ,Modelo10,Modelo11,Modelo12,Modelo13,Modelo14,Modelo15,Modelo16,
+                  Modelo17,Modelo18) %>% arrange(AIC)%>% mutate(DeltaAIC = AIC-min(AIC))
+kable(Modelos, caption = "Tabla comparativa con las características principales de los modelos ")
+
+dh<-expand.grid(list(frag=c(16, 40, 13, 1, 2, 41, 4, 20, 26, 15, 24, 6, 55, 32, 61, 18, 
+           9, 37, 8, 14, 62, 3, 35, 21, 46, 19, 12, 53, 31, 154) , Signo = c(
+             "Ys", "BE", "Ws", "Ds", "0"),Signo2=c("BP", "Ws", "0", "Ys", "BE", "Ds", "BS", "BB")))
+           ,AreaMerta=c(26.6113, 10.256889, 9.584757, 3.21, 3.485663, 0.52, 0, 1.086637, 
+                   9.217056, 0.2957632, 0.546408, 3.463207, 7.316348, 8.491326, 
+                   3.852367, 0.6447123, 2.905752, 20.274297, 2.294629, 12.042188, 
+                   13.67126, 54.43201, 24.13436, 13.55268, 10.307256, 4.933267, 
+                   1.891593, 16.683907, 1.2, 8.896993, 1.211785, 14.50929, 4.475, 
+                   5.23897, 2.126593, 3.38261, 3.033252, 12.066503, 4.813052, 0.8694025, 
+                   1.199115, 17.924223, 18.5468, 15.281916, 4.21573, 3.161969, 11.470595, 
+                   8.225619, 1.873274, 9.692234, 16.953667, 2.501593)))
+
+dput(unique(CM$Signo2))
+
+predict(mod1,dh,se.fit = TRUE)
+dh$pred<-predict(mod1,dh)
+
+
+dh$pred<-predict(mod1,dh,se.fit = TRUE)$fit
+dh$SE<-predict(mod1,dh,se.fit = TRUE)$se.fit
+
+############# plot de modelos ###############
+ggplot(dh,aes(x=frag,y=pred))+geom_ribbon(aes(ymin=pred-SE,ymax=pred+SE),alpha=0.05)+
+    geom_line()
+
+
+
+
+
+
+ggplot(dh,aes(x=frag,y=pred))+geom_ribbon(aes(ymin=pred-SE,ymax=pred+SE,fill=red,
+                                            lty=blues9),alpha=0.05)+ geom_line()
+                                                                                
+
+
+
+
+
+
+###################Plots#####################
+ggplot(CM, aes(x = Signo, y = AreFrag.m2)) + geom_point(aes(
+  color=Signo2,size = frag))+theme_classic()+scale_color_manual(
+    values=c("green2","black", "gray", "darkseagreen1","darkslategray3","goldenrod","snow2","Yellow"))
+
+
+ggplot(CM, aes(x = DiamMax, y = AreFrag.m2)) + geom_point(aes(
+  color = Signo, shape=Signo2), size = 3)
+
+ggplot(CM)+geom_histogram(aes(X=DiamMax))
+
+{r,fig.width=350, fig.height=250,echo=FALSE}
+library(png)
+library(grid)
+appimg <- readJPG(system.file("C:/Users/Julio César/Pictures/Papeles/coral.png"))
+grid.raster(appimg)
+
+

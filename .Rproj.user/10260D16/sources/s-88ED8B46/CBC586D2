@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1536677097038.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "CBC586D2",
+    "lastKnownWriteTime" : 3419473789575321445,
+    "last_content_update" : 1536677097038,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "148F295C",
+        "caption" : "CoorCM",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=CoorCM&cache_key=148F295C",
+        "displayedObservations" : 42,
+        "environment" : "",
+        "object" : "CoorCM",
+        "preview" : 0,
+        "totalObservations" : 42,
+        "variables" : 7
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
